@@ -33,7 +33,7 @@ function Statistics() {
             <YAxis stroke='black' />
             <Tooltip 
             contentStyle={{
-              backgroundColor:"black",
+              backgroundColor:"shy",
               borderColor:"black"
 
             }}

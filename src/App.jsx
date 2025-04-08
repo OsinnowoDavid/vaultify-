@@ -11,6 +11,7 @@ import ServiceBooking from './pages/ServiceBooking.jsx'
 import SecurityPersonnel from './pages/SecurityPersonnel.jsx'
 import Payment from './pages/Payment.jsx'
 import Residents from './pages/residents.jsx'
+import cleaning from './components/cleaning.jsx'
 function App() {
 
 

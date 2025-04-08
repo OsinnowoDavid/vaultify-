@@ -44,7 +44,7 @@ animate={{width:isSideBarOpen? 256:80}}
               SIDEBAR_ITEMS.map((item) => (
                 <NavLink 
                 activeClassName="active-link"
-                key={item.href.ac} to={item.href} className=''>
+                key={item.href} to={item.href} className=''>
                   <motion.div
                    whileHover={{scale:1.2}}
                    whileTap={{scale:0.9}}
