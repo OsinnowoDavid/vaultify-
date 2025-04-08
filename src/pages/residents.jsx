@@ -3,20 +3,21 @@ import search from "../assets/images/search.png"
 import {motion} from "framer-motion"
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import person from "../assets/images/person.png"
 const VISITORS =[
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"10AM-2PM", VisitStatus:"Active",Actions:"Active"},
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"10AM-2PM", VisitStatus:"Expire",Actions:"Active"},
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"10AM-2PM", VisitStatus:"Active",Actions:"Active"},
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"10AM-2PM", VisitStatus:"Expire",Actions:"Active"},
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"11AM-2PM", VisitStatus:"Active",Actions:"Active"},
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"10AM-2PM", VisitStatus:"Active",Actions:"Active"},
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"12AM-2PM", VisitStatus:"Expire",Actions:"Active"},
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"1AM-2PM", VisitStatus:"Active",Actions:"Active"},
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"10AM-2PM", VisitStatus:"Active",Actions:"Active"},
-  {name:"John Done Kenny", ResidentHost:"MR jOHN",Email:"john@gmail.com", AccessCode:"x1234", AccessArea:"First Gate", ValidPeriod:"10AM-2PM", VisitStatus:"Active",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"morning", VisitStatus:"Active ",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"morning", VisitStatus:"Expire ",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"morning", VisitStatus:"Active ",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"morning", VisitStatus:"Expire ",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"night", VisitStatus:"Active ",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"morning", VisitStatus:"Active ",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"night", VisitStatus:"Expire ",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"night", VisitStatus:"Active ",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"morning", VisitStatus:"Active ",Actions:"Active"},
+  {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"morning", VisitStatus:"Active ",Actions:"Active"},
 ]
 
-function ManageVisitors() {
+function Residents () {
   const [searchItems , SetSearchItems] =useState("");
   const [filterProducts ,SetFilterProducts] =useState(VISITORS)
 
@@ -24,8 +25,8 @@ function ManageVisitors() {
     const term =e.target.value.toLowerCase()
     SetSearchItems(term)
    const filter= VISITORS.filter(visitor => visitor.name.toLocaleLowerCase().includes(term )|| 
-    visitor.ResidentHost.toLocaleLowerCase().includes(term ) ||
-     visitor.AccessCode.toLocaleLowerCase().includes(term ) )
+    visitor.BadgeID.toLocaleLowerCase().includes(term ) ||
+     visitor.PhoneNumber.toLocaleLowerCase().includes(term ) )
      SetFilterProducts(filter)
 
   }
@@ -48,11 +49,12 @@ function ManageVisitors() {
   transition={{delay:0.2}}
 
 >
-<h1 className='text-xl font-semibold text-sky-950'>Manage Visitors</h1>
-
-  <div className=' flex justify-between items-center mb-6'>
+<h1 className='text-xl font-semibold text-sky-950'>Manage Residents</h1>
+    
+    <div className=' flex justify-between items-center mb-6'>
 
   <h2 className='text-xl font-semibold text-sky-950'> All Users</h2>
+  
   <div className='relative'>
     <input type='text' placeholder='Search Engine'
     onChange={handleSearch}
@@ -61,10 +63,11 @@ function ManageVisitors() {
   </div>
   <img className='absolute  ' sizes={10} sur={search} />
   <Link to={"/AddManageResidents"} className= 'mr-25 p-2 rounded-xl mt-1 bg-sky-950 text-white hover:bg-white hover:text-sky-900'>
-  <button > + Add Visitor</button>
+  <button > + Add New Residents</button>
   
   </Link>
 </div>
+
 <div className='overflow-x-auto'>
   <table className='min-w-full divide-y divide-grey-700'
   >
@@ -74,27 +77,33 @@ function ManageVisitors() {
         <th>
           
         </th>
+
+        <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
+image
+        </th>
+
         <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
 name
         </th>
 
         <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-resident host
+badge id
         </th>
 
         <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-Access Code
+        Phone Number
+
 
         </th>
 
         <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-Access area
+Assigned Location
         </th>
         <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-valid period 
+status
         </th>
         <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-visit status
+shift
         </th>
         
         
@@ -114,15 +123,18 @@ Actions
         >
           <button type='checkbox' className='p-2 m-5 whitespace-nowrap text-sm w-0.5 border-1 font-medium text-grey-900' onClick={selection}></button>
 
+          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'><img src={person}/></td>
           <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.name}
+            
           <p>{visitor.Email}</p>
 
           </td>
-          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.ResidentHost}</td>
-          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.AccessCode}</td>
-          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.AccessArea}</td>
-          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.ValidPeriod}</td>
+          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.BadgeID}</td>
+          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.PhoneNumber}</td>
+          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.AssignedLocation}</td>
           <td className={`p-2 whitespace-nowrap text-sm font-medium text-grey-900 ${visitor.VisitStatus ==="Active" ? "bg-green-800 text-white":"bg-red-800 text-white"}`}>{visitor.VisitStatus}</td>
+
+          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.Shift}</td>
           <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{visitor.Actions}</td>
         </motion.tr>
       ))}
@@ -134,4 +146,4 @@ Actions
 </motion.div>  )
 }
 
-export default ManageVisitors
+export default Residents 

@@ -62,8 +62,9 @@ function ManageSecurityP() {
 
 </h1>
 <div children="item-center justify-center ">
-  <button className='bg-sky-800 rounded-2xl p-2 text-white' type='submit'> Create Security Personnel Profile</button >
-</div>
+  <button className='bg-sky-800 rounded-2xl p-2 text-white' type='submit'>
+    Submit
+</button></div>
 </form>
 </motion.div>
     </div>

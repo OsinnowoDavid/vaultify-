@@ -10,11 +10,11 @@ import sideBARicons from "../assets/images/sidebarIcons.png"
 const SIDEBAR_ITEMS =[
     
     {name:"Dashboard", icon:sideBARicons, href:"/dashboard"},
-    {name:"Manage Residents", icon:sideBARicons, href:"/ManageResidents"},
-    {name:"Manage Security P.", icon:sideBARicons, href:"/ManageSecurityP"},
-    {name:"Manage Visitors", icon:sideBARicons, href:"/dashboard"},
-    {name:"Payment MGT.", icon:sideBARicons, href:"/payment"},
-    {name:"Service Bookings", icon:sideBARicons, href:"/dashboard"},
+    {name:"Manage Residents", icon:sideBARicons, href:"/residents"},
+    {name:"Manage Security P.", icon:sideBARicons, href:"/securityPersonnel"},
+    {name:"Manage Visitors", icon:sideBARicons, href:"/ManageVisitors"},
+    {name:"Payment MGT.", icon:sideBARicons, href:"payment"},
+    {name:"Service Bookings", icon:sideBARicons, href:"/service"},
     {name:"Lost & Found MGT.", icon:sideBARicons, href:"/dashboard"},
     {name:"Announcement", icon:sideBARicons, href:"/Announcement"},
     {name:"Export Details", icon:sideBARicons, href:"/dashboard"},
