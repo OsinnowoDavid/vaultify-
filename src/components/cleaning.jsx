@@ -13,30 +13,38 @@ const SERVICE=[
 function Cleaning() {
   return (
     <>
-    <div className='mt-25'>cleaning</div>
+    <div className='mt-25 ml-25 font-semibold text-sky-950 w-3xl '>cleaning</div>
     <div>
-<table className="table table-bordered table-striped table-hover">
+<table className='min-w-full divide-y divide-grey-700'>
 
-  <tbody className='min-w-full max-w-full divide-y divide-grey-700 m-5 '>
+<thead>
+
+
+
     <tr>
-      <th>Service</th>
-      <th>Price</th>
-      <th>Rating</th>
-      <th>Contact</th>
-      <th>Availability Status</th>
-      <th>Profile Details</th>
+      <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>Service</th>
+      <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>Price</th>
+      <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>Rating</th>
+      <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>Contact</th>
+      <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>Availability Status</th>
+      <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>Profile Details</th>
     </tr>
+</thead>
+<tbody className='min-w-full max-w-full divide-y divide-grey-700 m-5 '>
+
+
     {SERVICE.map((service, index) => (
       <tr key={index}>
-        <td>{service.name}</td>
-        <td>{service.price}</td>
-        <td>{service.rating}</td>
-        <td>{service.contact}</td>
-        <td>{service.AvailabilityStatus}</td>
-        <td>{service.ProfileDetails}</td>
+        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{service.name}</td>
+        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{service.price}</td>
+        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{service.rating}</td>
+        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{service.contact}</td>
+        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{service.AvailabilityStatus}</td>
+        <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{service.ProfileDetails}</td>
       </tr>
     ))}
   </tbody>
+
 </table>
 
     </div>

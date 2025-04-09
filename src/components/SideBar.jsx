@@ -15,7 +15,7 @@ const SIDEBAR_ITEMS =[
     {name:"Manage Visitors", icon:sideBARicons, href:"/ManageVisitors"},
     {name:"Payment MGT.", icon:sideBARicons, href:"payment"},
     {name:"Service Bookings", icon:sideBARicons, href:"/service"},
-    {name:"Lost & Found MGT.", icon:sideBARicons, href:"/dashboard"},
+    {name:"Lost & Found MGT.", icon:sideBARicons, href:"/LostAndFound"},
     {name:"Announcement", icon:sideBARicons, href:"/Announcement"},
     {name:"Export Details", icon:sideBARicons, href:"/dashboard"},
     {name:"Log Out", icon:sideBARicons, href:"/dashboard"},
