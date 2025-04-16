@@ -17,7 +17,7 @@ const VISITORS =[
   {name:"John Done Kenny", BadgeID:"AAXBOI",Email:"john@gmail.com", PhoneNumber:"+234091783295973", AssignedLocation:"First Gate", Shift:"morning", VisitStatus:"Active ",Actions:"Active"},
 ]
 
-function Residents () {
+function Administration () {
   const [searchItems , SetSearchItems] =useState("");
   const [filterProducts ,SetFilterProducts] =useState(VISITORS)
 
@@ -49,11 +49,11 @@ function Residents () {
   transition={{delay:0.2}}
 
 >
-<h1 className='text-xl font-semibold text-sky-950'>Manage Residents</h1>
+<h1 className='text-xl font-semibold text-sky-950'>Manage Admin</h1>
     
     <div className=' flex justify-between items-center mb-6'>
 
-  <h2 className='text-xl font-semibold text-sky-950'> All Users</h2>
+  <h2 className='text-xl font-semibold text-sky-950'> All Admin</h2>
   
   <div className='relative'>
     <input type='text' placeholder='Search Engine'
@@ -62,8 +62,8 @@ function Residents () {
      className='rounded-lg placeholder-sky-900 placeholder:p-5 focus:outline-none focus:ring-2 focus:ring-sky-800'></input>
   </div>
   <img className='absolute  ' sizes={10} sur={search} />
-  <Link to={"/AddManageResidents"} className= 'mr-30 p-2 rounded-xl mt-1 bg-sky-950 text-white hover:bg-white hover:text-sky-900 '>
-  <button > + Add Residents</button>
+  <Link to={"/AddAmin"} className= 'mr-30 p-2 rounded-xl mt-1 bg-sky-950 text-white hover:bg-white hover:text-sky-900 '>
+  <button > + Add Admin</button>
   
   </Link>
 </div>
@@ -146,4 +146,4 @@ Actions
 </motion.div>  )
 }
 
-export default Residents 
+export default Administration 

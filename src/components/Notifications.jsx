@@ -1,5 +1,6 @@
 import React from 'react'
 import {motion} from "framer-motion"
+import not from "../assets/images/not.png"
 const ALARM=[
     { name:"fire Alarm", location:"Road 5, Block 8"},
     { name:"Flood", location:"Road 10, Block 8"},
@@ -32,7 +33,7 @@ function Notifications() {
 
     <div className='p-2 rounded-xl bg-white m-2 flex '>
         <div className='m-5'>
-        <h1>asfdf</h1>
+        <img className='w-8' src={not}/>
 
         </div>
 <div>

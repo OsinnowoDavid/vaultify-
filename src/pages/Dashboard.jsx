@@ -11,7 +11,7 @@ function Dashboard() {
 {/* the dashboard calculations */}
 <Aggregation/>
 <Chart/>
-<ToDoList/>
+{/* <ToDoList/> */}
     </div>
   )
 }

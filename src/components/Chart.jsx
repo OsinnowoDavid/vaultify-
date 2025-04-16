@@ -4,7 +4,7 @@ import Notifications from "./Notifications"
 
 function Chart() {
   return (
-    <div className='flex gap-5 lg:flex-col-2 xl:flex-col-1'>
+    <div className='grid grid-cols-1 md:grid-cols-2  gap-5 lg:grid-col-2 xl:flex-col-2 sm:flex-col-2'>
 <Statistics/>
    <Notifications/>
 
