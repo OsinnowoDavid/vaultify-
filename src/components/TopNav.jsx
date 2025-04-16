@@ -3,10 +3,10 @@ import  search from "../assets/images/search.png"
 import blackIcon from "../assets/images/blackIcon.png"
 import person from "../assets/images/person.png"
 import { useShopContext } from '../context'
-import { useQuery } from "react-query";
+// import { useQuery } from "react-query";
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 function TopNav() {
 
   const {user} = useSelector(state => state.user)

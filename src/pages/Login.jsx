@@ -7,7 +7,9 @@ import {toast} from "react-toastify"
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { signInFail,signInSuccess,loginStart } from "../redux/User/userSlice.js";
-import vaultify from "../assets/images/vaultify.png"
+
+// import vaultify from "../assets/images/vaultify.png"
+import images from "../assets/properties.jsx"
 function Login() {
   const dispatch = useDispatch()
 const {loading , error} = useSelector((state) => state.user)
@@ -65,7 +67,7 @@ toast.loading("Processing...")
     <div className="mt-10 justify-self-center mx-auto">
       <h1 className="justify-self-center justify-centers font-bold text-3xl font-Montserrat">Vault<span className="text-cyan-700">ify</span> Admin Dashboard </h1>
 <div>
-  <img src={vaultify} className="mx-auto mb-5"/>
+  <img src={images.vaultify} className="mx-auto mb-5"/>
 </div>
       
 <form
