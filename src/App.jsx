@@ -40,7 +40,7 @@ function App() {
   const location = useLocation();
   const isONlOGIN = location.pathname === "/";
   return (
-    <>
+    
         <QueryClientProvider client={queryClient}>
 
       {!isUserValid ? <Outlet /> : <Navigate to={"/"} />}
@@ -88,7 +88,7 @@ function App() {
       </div>
       </QueryClientProvider>
 
-    </>
+  
   );
 }
 
