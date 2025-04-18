@@ -127,7 +127,7 @@ Edit Admin
       </tr>
     </thead>
     <tbody className='min-w-full max-w-full divide-y divide-grey-700 '>
-      {data?.data.admins.map((admin) => (
+      {data?.data?.admins.map((admin) => (
         <motion.tr key={admin.adminName} className='bg-white hover:bg-gray-100 '
         initial={{ opacity:0,y:20}}
   
