@@ -21,15 +21,15 @@ const {loading , error} = useSelector((state) => state.user)
 
   const handleSubmit = async (e)=>{
 
-toast.loading("Loading...")
 
     try {e.preventDefault()
       dispatch(loginStart())
       axios.defaults.withCredentials=true
      const {data}= await axios.post(backendUrl+ '/api/admin/login', {adminEmail,adminPassword} )
+
      if (data.success){
       dispatch(signInSuccess(data.userData))
-toast.loading("Processing...")
+toast.success("Welcome back")
     
       navigate("/dashboard")
      }else{
