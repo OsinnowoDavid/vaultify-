@@ -144,7 +144,7 @@ function Administration() {
           </button> */}
 <button>
 
-          <Link to="/AddAmin" className='p-2 rounded-xl bg-sky-950 text-white hover:bg-white hover:text-sky-900'>
+          <Link href={"/AddAmin"} className='p-2 rounded-xl bg-sky-950 text-white hover:bg-white hover:text-sky-900'>
             + Add Admin
           </Link>
 </button>
