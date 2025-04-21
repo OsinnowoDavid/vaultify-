@@ -38,7 +38,7 @@ getAuthState
         }
     }
 
-    const backendUrl = "https://vaultify-backend-n0lo.onrender.com"
+const backendUrl = "https://vaultify-backend-n0lo.onrender.com"
 //  const backendUrl = "http://localhost:8000"
     const Value = {
         backendUrl,
