@@ -18,6 +18,8 @@ function Administration() {
   if (data) {
     console.log(data)
   }
+
+
   // const [searchItems, setSearchItems] = useState("")
   // const [filterProducts, setFilterProducts] = useState([])
   // const [selectedAdmins, setSelectedAdmins] = useState([])
@@ -140,10 +142,13 @@ function Administration() {
           >
             Delete Selected
           </button> */}
+<button>
 
-          <Link to={"/AddAdmin"} className='p-2 rounded-xl bg-sky-950 text-white hover:bg-white hover:text-sky-900'>
+          <Link to="/AddAmin" className='p-2 rounded-xl bg-sky-950 text-white hover:bg-white hover:text-sky-900'>
             + Add Admin
           </Link>
+</button>
+
         </div>
       </div>
 
