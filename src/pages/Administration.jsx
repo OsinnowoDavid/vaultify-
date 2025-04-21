@@ -1,162 +1,199 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import search from "../assets/images/search.png"
-import {motion} from "framer-motion"
-import { useState } from 'react'
+import { motion } from "framer-motion"
 import { Link } from 'react-router-dom'
 import person from "../assets/images/person.png"
-import {useQuery} from "react-query"
+import { useQuery } from "react-query"
 import axios from "axios"
 import { useShopContext } from '../context'
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 
+function Administration() {
+  const { backendUrl } = useShopContext()
+  const { data, isLoading, error } = useQuery("admin", () =>
+    axios.get(backendUrl + "/api/admin/getAllAdmin")
+  )
 
+  const [searchItems, setSearchItems] = useState("")
+  const [filterProducts, setFilterProducts] = useState([])
+  const [selectedAdmins, setSelectedAdmins] = useState([])
 
-function Administration () {
-  const {backendUrl}= useShopContext()
-  const {data,loading, error} = useQuery("admin",()=>{
- return   axios.get(backendUrl +"/api/admin/getAllAdmin")
-    })
-if(error){
-  toast.error(error.message)
-}
-if(loading){
-  toast.loading("processing....")
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message, {
+        theme: "colored",
+        style: { backgroundColor: "#ef4444", color: "#fff", fontWeight: "bold" }
+      })
+    }
+  }, [error])
 
-}
-if (data)(
-  console.log(data.data.admins)
-)
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     toast.loading("Processing...", {
+  //       theme: "colored",
+  //       style: { backgroundColor: "#0284c7", color: "#fff", fontWeight: "bold" }
+  //     })
+  //   }
+  // }, [isLoading])
 
-  // const [searchItems , SetSearchItems] =useState("");
-  // const [filterProducts ,SetFilterProducts] =useState(data?.data?.admins)
+  useEffect(() => {
+    if (data?.data?.admins) {
+      setFilterProducts(data.data.admins)
+    }
+  }, [data])
+
+  const handleSearch = (e) => {
+    const value = e.target.value
+    setSearchItems(value)
+    const filtered = data?.data?.admins.filter((admin) =>
+      admin.adminName.toLowerCase().includes(value.toLowerCase())
+    )
+    setFilterProducts(filtered)
+  }
+
+  const handleSingleSelect = (id) => {
+    setSelectedAdmins((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((adminId) => adminId !== id)
+        : [...prevSelected, id]
+    )
+  }
+
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${backendUrl}/api/admin/deleteAdmin/${id}`)
-      toast.success("Admin Deleted Successfully")
-     window.location.reload()
+      toast.success("Admin Deleted Successfully", {
+        theme: "colored",
+        style: { backgroundColor: "#22c55e", color: "#fff", fontWeight: "bold" }
+      })
+      window.location.reload()
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message, {
+        theme: "colored",
+        style: { backgroundColor: "#ef4444", color: "#fff", fontWeight: "bold" }
+      })
     }
   }
 
-
-
-
-  // const handleSearch=(e)=>{
-  //   const term =e.target.value.toLowerCase()
-  //   SetSearchItems(term)
-  //  const filter= data.filter(admin => admin.adminName.toLocaleLowerCase().includes(term )|| 
-  //   admin.adminRole.toLocaleLowerCase().includes(term ) ||
-  //    admin.adminEmail.toLocaleLowerCase().includes(term ) )
-  //    SetFilterProducts(filter)
-
-  // }
-  const selection =(e)=>{
-
-
-    e.preventDefault()
-    e.target.value =! e.target.value
-    console.log(e.target.value)
-    console.log("Selected")
-  
-
+  const handleBulkDelete = async () => {
+    try {
+      await Promise.all(
+        selectedAdmins.map((id) =>
+          axios.delete(`${backendUrl}/api/admin/deleteAdmin/${id}`)
+        )
+      )
+      toast.success("Selected Admins Deleted", {
+        theme: "colored",
+        style: { backgroundColor: "#22c55e", color: "#fff", fontWeight: "bold" }
+      })
+      window.location.reload()
+    } catch (error) {
+      toast.error("Failed to delete selected admins", {
+        theme: "colored",
+        style: { backgroundColor: "#ef4444", color: "#fff", fontWeight: "bold" }
+      })
+    }
   }
 
   return (
-<motion.div className='bg-gray-200 backdrop-blur-md shadow-lg  rounded-xl p-6 border-black mt-10 '
-  initial={{ opacity:0,y:20}}
-  
-  animate={{opacity:1,y:0}}
-  transition={{delay:0.2}}
+    <motion.div className='bg-gray-200 backdrop-blur-md shadow-lg rounded-xl p-6 border-black mt-10'
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+    >
+      <h1 className='text-xl font-semibold text-sky-950'>Manage Admin</h1>
 
->
-<h1 className='text-xl font-semibold text-sky-950'>Manage Admin</h1>
-    
-    <div className=' flex justify-between items-center mb-6'>
+      <div className='flex justify-between items-center mb-6'>
+        <h2 className='text-xl font-semibold text-sky-950'>All Admin</h2>
 
-  <h2 className='text-xl font-semibold text-sky-950'> All Admin</h2>
-{/*   
-  <div className='relative'>
-    <input type='text' placeholder='Search Engine'
-    // onChange={handleSearch}
-    // value={searchItems}
-     className='rounded-lg placeholder-sky-900 placeholder:p-5 focus:outline-none focus:ring-2 focus:ring-sky-800'></input>
-  </div>
-  <img className='absolute  ' sizes={10} sur={search} /> */}
-  <Link to={"/AddAmin"} className= 'mr-30 p-2 rounded-xl mt-1 bg-sky-950 text-white hover:bg-white hover:text-sky-900 '>
-  <button > + Add Admin</button>
-  
-  </Link>
-</div>
+        <div className='relative flex items-center'>
+          <input
+            type='text'
+            placeholder='Search Admin'
+            onChange={handleSearch}
+            value={searchItems}
+            className='rounded-lg placeholder-sky-900 pl-10 py-2 focus:outline-none focus:ring-2 focus:ring-sky-800'
+          />
+          <img src={search} alt="search" className='absolute left-2 w-5' />
+        </div>
 
-<div className='overflow-x-auto'>
-  <table className='min-w-full divide-y divide-grey-700'
-  >
-    <thead >
-
-      <tr className='text-sky-950'>
-        <th>
-          
-        </th>
-
-        <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-image
-        </th>
-
-        <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-Admin name
-        </th>
-
-        <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-Admin Role
-        </th>
-
-        <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-Delete Admin
-
-        </th>
-
-        
-        
-        
-        
-        <th className='px-6 py-3 text-left text-xs font-medium text-grey-400 uppercase tracking-wide'>
-Edit Admin
-        </th>
-
-      </tr>
-    </thead>
-    <tbody className='min-w-full max-w-full divide-y divide-grey-700 '>
-      {data?.data?.admins.map((admin) => (
-        <motion.tr key={admin.adminName} className='bg-white hover:bg-gray-100 '
-        initial={{ opacity:0,y:20}}
-  
-        animate={{opacity:1,y:0}}
-        transition={{delay:0.2}}
-        >
-          <button type='checkbox' className='p-2 m-5 whitespace-nowrap text-sm w-0.5 border-1 font-medium text-grey-900' onClick={selection}></button>
-
-          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'><img src={person}/></td>
-          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{admin.adminName}
-            
-          <p>{admin.adminEmail}</p>
-
-          </td>
-          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>{admin.adminRole}</td>
-          <button   onClick={() => handleDelete(admin._id)}
-className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900'>
-          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-grey-900  hover:bg-red-700 hover:text-white'>Delete</td>
-
+        <div className='flex gap-4'>
+          <button
+            onClick={handleBulkDelete}
+            disabled={selectedAdmins.length === 0}
+            className={`p-2 rounded-xl ${selectedAdmins.length === 0
+              ? 'bg-gray-400 text-white'
+              : 'bg-red-700 hover:bg-red-800 text-white'
+              }`}
+          >
+            Delete Selected
           </button>
-          <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-shadow-green-500  hover:bg-green-700 hover:text-white'>Edit</td>
-        </motion.tr>
-      ))}
-      <pigination/>
 
-    </tbody>
-  </table>
-</div>
-</motion.div>  )
+          <Link to={"/AddAdmin"} className='p-2 rounded-xl bg-sky-950 text-white hover:bg-white hover:text-sky-900'>
+            + Add Admin
+          </Link>
+        </div>
+      </div>
+
+      <div className='overflow-x-auto'>
+        <table className='min-w-full divide-y divide-gray-700'>
+          <thead>
+            <tr className='text-sky-950'>
+              <th className='px-4 py-3'></th>
+              <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wide'>Image</th>
+              <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wide'>Admin Name</th>
+              <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wide'>Admin Role</th>
+              <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wide'>Delete</th>
+              <th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wide'>Edit</th>
+            </tr>
+          </thead>
+          <tbody className='divide-y divide-gray-700'>
+            {filterProducts?.map((admin) => (
+              <motion.tr key={admin._id} className='bg-white hover:bg-gray-100'
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <td className='px-4 py-4'>
+                  <input
+                    type='checkbox'
+                    checked={selectedAdmins.includes(admin._id)}
+                    onChange={() => handleSingleSelect(admin._id)}
+                  />
+                </td>
+
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <img src={person} alt="admin" className='w-10 h-10 rounded-full' />
+                </td>
+
+                <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+                  {admin.adminName}
+                  <p className='text-gray-500 text-xs'>{admin.adminEmail}</p>
+                </td>
+
+                <td className='px-6 py-4 whitespace-nowrap'>{admin.adminRole}</td>
+
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <button
+                    onClick={() => handleDelete(admin._id)}
+                    className='text-red-600 hover:bg-red-700 hover:text-white px-3 py-1 rounded'
+                  >
+                    Delete
+                  </button>
+                </td>
+
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <button className='text-green-600 hover:bg-green-700 hover:text-white px-3 py-1 rounded'>
+                    Edit
+                  </button>
+                </td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </motion.div>
+  )
 }
 
-export default Administration 
+export default Administration
