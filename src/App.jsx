@@ -29,6 +29,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { QueryClientProvider,    QueryClient } from "react-query";
 import PrivateRoute from "./pages/PrivateRoute.jsx";
 import Administration from "./pages/Administration.jsx";
+import EditAdmins from "./components/EditAdmins.jsx";
 
 // import "react-toastify/disk/ReactToastify.css"
 import { useState } from "react";
@@ -80,6 +81,7 @@ function App() {
           <Route path="/Found" element={<Found />} />
           <Route path="/Administration" element={<Administration />} />
           <Route path="/AddAmin" element={<AddAmin />} />
+          <Route path="/EditAdmins/:id" element={<EditAdmins />} />
           </Route>
          
         </Routes>

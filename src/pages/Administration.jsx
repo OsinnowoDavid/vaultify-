@@ -144,7 +144,7 @@ function Administration() {
           </button> */}
 <button>
 
-          <Link href={"/AddAmin"} className='p-2 rounded-xl bg-sky-950 text-white hover:bg-white hover:text-sky-900'>
+          <Link to={"/AddAmin"} className='p-2 rounded-xl bg-sky-950 text-white hover:bg-white hover:text-sky-900'>
             + Add Admin
           </Link>
 </button>
@@ -202,9 +202,13 @@ function Administration() {
                   </td>
 
                   <td className='px-6 py-4 whitespace-nowrap'>
+                  <Link to={`/EditAdmins/${admin._id}`}>
+
                     <button className='text-green-600 hover:bg-green-700 hover:text-white px-3 py-1 rounded'>
-                      Edit
+                     Edit
+                   
                     </button>
+                    </Link> 
                   </td>
                 </motion.tr>
               
