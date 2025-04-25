@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 function EditAdmins() {
   const [adminName, setAdminName] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
@@ -13,7 +15,7 @@ function EditAdmins() {
   const navigate = useNavigate()
   const { backendUrl } = useShopContext();
   const { id } = useParams();
-
+const { user } = useSelector(state => state.user)
   const { data, error, isLoading } = useQuery("singleAdmin", () =>
     axios.get(`${backendUrl}/api/admin/getAdminById/${id}`).then(res => res.data)
   );
@@ -30,6 +32,10 @@ function EditAdmins() {
   const editAdmin = async (e) => {
     e.preventDefault();
     try {
+        if(!user.adminRole.includes("superadmin")){
+            return toast.error("You are not authorized to Edit admins")
+          }
+      
       const { data } = await axios.put(`${backendUrl}/api/admin/editAdmin/${id}`, {
         adminName,
         adminEmail,

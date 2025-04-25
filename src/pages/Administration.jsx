@@ -7,17 +7,23 @@ import { useQuery } from "react-query"
 import axios from "axios"
 import { useShopContext } from '../context'
 import { toast } from "react-toastify"
-
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { IsNotSuperAdmin } from '../redux/User/userSlice'
 function Administration() {
+    const {user} = useSelector(state => state.user)
+  
+  // const{IsNotSuperAdmin} = useSelector(state => state.user)
+  const dispatch = useDispatch()
   const { backendUrl } = useShopContext()
   const { data, isLoading, error } = useQuery("admin", () =>
     axios.get(backendUrl + "/api/admin/getAllAdmin",{
        withCredentials: true
     })
   )
-  if (data) {
-    console.log(data)
-  }
+  // if (data) {
+  //   console.log(data)
+  // }
 
 
   // const [searchItems, setSearchItems] = useState("")
@@ -68,9 +74,16 @@ function Administration() {
   }
 
   // Handle deleting a single admin
-  const handleDelete = async (id) => {
+  const handleDelete = async (id) => { 
+
     try {
+    if(!user.adminRole.includes("superadmin")){
+      return toast.error("You are not authorized to delete admins")
+    }
+
       await axios.delete(`${backendUrl}/api/admin/deleteAdmin/${id}`)
+
+
       toast.success("Admin Deleted Successfully", {
         theme: "colored",
         style: { backgroundColor: "#22c55e", color: "#fff", fontWeight: "bold" }
@@ -104,6 +117,7 @@ function Administration() {
       })
     }
   }
+
 
   // Loading and error UI
   if (isLoading) return <p>Loading...</p>

@@ -3,7 +3,8 @@ const initialState = {
     user: null,
     loading: false,
     error: null,
-    token :null
+    token :null,
+    superAdmin :("superadmin")
 }
 const userSlice = createSlice({
     name: "user",
@@ -26,6 +27,7 @@ const userSlice = createSlice({
             state.loading = false;
             state.user = action.payload;
         },
+
         loginFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
@@ -33,7 +35,11 @@ const userSlice = createSlice({
         logout: (state) => {
             state.user = null;
         },
+        IsNotSuperAdmin:(state,action) =>{
+            action.payload= !state.user.adminRole.includes(state.superAdmin)
+            state.loading = false;
+        }
     },
 });
-export const { signInSuccess, signInFail, loginStart, loginSuccess, loginFailure, logout } = userSlice.actions;
+export const { signInSuccess, signInFail, loginStart, loginSuccess, loginFailure, logout,IsNotSuperAdmin } = userSlice.actions;
 export default userSlice.reducer;
