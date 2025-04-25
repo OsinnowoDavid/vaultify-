@@ -28,8 +28,11 @@ const {loading , error} = useSelector((state) => state.user)
     try {e.preventDefault()
       dispatch(loginStart())
       axios.defaults.withCredentials=true
-     const {data}= await axios.post(backendUrl+ '/api/admin/login', {adminEmail,adminPassword} )
+     const {data, loading}= await axios.post(backendUrl+ '/api/admin/login', {adminEmail,adminPassword} )
+if(loading){
+toast.success("Loading...")
 
+}
      if (data.success){
       dispatch(signInSuccess(data.userData))
 toast.success("Welcome back")
