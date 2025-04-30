@@ -134,12 +134,11 @@ function AddAmin() {
       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       required>
       admin
-    <option value="Super Admin">Super-admin</option>
-
+    <option value="Superadmin">Superadmin</option>
       <option value="Admin">Admin</option>
-      <option value="Manager">User</option>
+      <option value="User">User</option>
     </select>
-    {/* <input
+    {/* <inputs
       type="text"
       id="adminRole"
       placeholder="Admin Role"
