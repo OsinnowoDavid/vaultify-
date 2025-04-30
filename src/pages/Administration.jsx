@@ -10,11 +10,16 @@ import { toast } from "react-toastify"
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { IsNotSuperAdmin } from '../redux/User/userSlice'
+import { useNavigate } from 'react-router-dom'
 function Administration() {
+  const navigate = useNavigate()
     const {user} = useSelector(state => state.user)
   
   // const{IsNotSuperAdmin} = useSelector(state => state.user)
   const dispatch = useDispatch()
+
+
+
   const { backendUrl } = useShopContext()
   const { data, isLoading, error } = useQuery("admin", () =>
     axios.get(backendUrl + "/api/admin/getAllAdmin",{
@@ -31,6 +36,14 @@ function Administration() {
   // const [selectedAdmins, setSelectedAdmins] = useState([])
 
   // Handle errors and show toasts
+  useEffect(() => {
+    if (user.adminRole !== "superadmin") {
+      toast.info("You are not authorized to view this page", )
+      navigate("/dashboard")
+      
+    }
+  }, [])
+
   useEffect(() => {
     if (error) {
       toast.error(error.message, {
