@@ -127,7 +127,19 @@ function AddAmin() {
     <label htmlFor="adminRole" className="block text-gray-700 font-semibold mb-2">
       Admin Role
     </label>
-    <input
+    <select value={adminRole}
+      type="text"
+      id="adminRole"
+      onChange={(e) => setRole(e.target.value)}
+      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      required>
+      admin
+    <option value="Super Admin">Super-admin</option>
+
+      <option value="Admin">Admin</option>
+      <option value="Manager">User</option>
+    </select>
+    {/* <input
       type="text"
       id="adminRole"
       placeholder="Admin Role"
@@ -135,7 +147,7 @@ function AddAmin() {
       onChange={(e) => setRole(e.target.value)}
       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       required
-    />
+    /> */}
   </div>
 
   <div className="mb-6">

@@ -5,6 +5,8 @@ const DASHBOARD =[
     { name:"Security Staff",total :"8",red:"Pending Access Approvals"},
     { name:"Pending Access Approvals",total :"5",red:"Pending Access Approvals"},
     { name:"Alerts Raised Today",total :"10",red:"Unresolved Alerts Count"},
+    { name:"Total Number Of Visitors",total :"350",red:"Unresolved Alerts Count"},
+    { name:"Total Number Of Incidents",total :"350",red:"Unresolved Alerts Count"},
   ]
 function aggregation() {
   return (
