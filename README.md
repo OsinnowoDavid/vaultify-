@@ -40,3 +40,4 @@ CONCLUSION: HOW THESE SYSTEMS INTERACT: 1. Mobile App (Security and Residents):
  When an admin wants to view detailed data from a particular estate (e.g., specific resident logs, visitor entries), the dashboard makes an API call to the relevant estate’s database
 
 https://vaultify-omega.vercel.app# vaultify-admin-dashboard
+# vaultify-admin-dashboard
