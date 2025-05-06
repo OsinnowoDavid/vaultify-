@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { signInFail,signInSuccess,loginStart } from "../redux/User/userSlice.js";
 import vau from "../assets/images/vau.png"
 import { Eye, EyeOff } from "lucide-react";
+import { Link } from "react-router-dom";
 // import vaultify from "../assets/images/vaultify.png"
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -133,6 +134,12 @@ toast.success("Welcome back")
   >
     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
   </button>
+</div>
+<div>
+  < Link to={"/enterEmail"}>
+  <h1 className=" mb-5">Forgot Password Or Change Password</h1>
+
+  </Link>
 </div>
 
   <button
