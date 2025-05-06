@@ -32,7 +32,7 @@ import VerificationInput from "./pages/VerificationCode.jsx";
 function App() {
   const queryClient = new QueryClient();
   const location = useLocation();
-  const isONlOGIN = location.pathname === "/" || location.pathname === "/enterEmail"|| location.pathname === "/ VerificationInput";
+  const isONlOGIN = location.pathname === "/" || location.pathname === "/enterEmail"|| location.pathname === "/verify";
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -59,7 +59,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<Login />} />
           <Route path="/enterEmail" element={<EnterEmail />} />
-          <Route path="/VerificationInput" element={<VerificationInput/>} />
+          <Route path="/verify" element={<VerificationInput/>} />
 
           <Route path="*" element={<Navigate to="/" />} />
 
