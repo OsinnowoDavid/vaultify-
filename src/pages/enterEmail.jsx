@@ -23,10 +23,10 @@ function EnterEmail() {
         toast.success("Verification code sent to your email");
         navigate("/verify");
       } else {
-        toast.error(data.message || "Failed to send verification code");
+        toast.error( "Failed to send verification code");
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message || "Something went wrong");
+      toast.error("Something went wrong");
       console.error("Error:", error);
     }
   }
