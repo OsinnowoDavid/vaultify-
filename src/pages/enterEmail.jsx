@@ -17,14 +17,12 @@ function EnterEmail() {
       const { data } = await axios.post(`${backendUrl}/api/admin/sendRestOtp`, {
         adminEmail
       });
-
-      if (data.success) {
-  
-        toast.success("Verification code sent to your email");
+  if (data.success) {
+        toast.success("Please check your email for the OTP");
         navigate("/verify");
-      } else {
-        toast.error( "Failed to send verification code");
-      }
+  }
+      
+      
     } catch (error) {
       toast.error("Something went wrong");
       console.error("Error:", error);

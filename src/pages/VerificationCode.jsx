@@ -1,20 +1,25 @@
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
 import vau from "../assets/images/vau.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useShopContext } from "../context";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function VerificationInput({ onComplete }) {
   const inputRefs = useRef([]);
+  const navigate = useNavigate();
   const [OTP, setCode] = useState(new Array(6).fill(""));
   const [adminEmail, setEmail] = useState("");
   const [newPassword, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { backendUrl } = useShopContext();
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus();
+    }
+  }, []);
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -49,25 +54,23 @@ function VerificationInput({ onComplete }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    const otpString = OTP.join("");
     try {
       const { data } = await axios.post(`${backendUrl}/api/admin/resetPassword`, {
-        otp: OTP.join(""),
-        email: adminEmail,
-        password: newPassword
+        adminEmail,
+        OTP: otpString,
+        newPassword,
       });
 
       if (data.success) {
         toast.success("Password reset successfully");
         navigate("/");
       } else {
-        toast.error( "Failed to reset password, Check the correct Email and OTP");
+        toast.error("Failed to reset password");
       }
     } catch (error) {
-      toast.error( "Something went wrong");
+      toast.error("Something went wrong");
       console.error("Error:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -82,10 +85,12 @@ function VerificationInput({ onComplete }) {
       </div>
 
       <form onSubmit={handleSubmit}>
+        {/* OTP Inputs */}
         <div className="flex gap-3 justify-center mt-4">
           {OTP.map((digit, index) => (
             <input
               key={index}
+              name={`otp-${index}`}
               type="text"
               inputMode="numeric"
               maxLength={1}
@@ -98,9 +103,11 @@ function VerificationInput({ onComplete }) {
           ))}
         </div>
 
+        {/* Email Input */}
         <div className="mt-5">
           <label htmlFor="adminEmail">Email</label>
           <input
+            name="adminEmail"
             type="email"
             id="adminEmail"
             placeholder="Enter your email"
@@ -111,10 +118,12 @@ function VerificationInput({ onComplete }) {
           />
         </div>
 
+        {/* Password Input with Show/Hide */}
         <div className="mt-5">
           <label htmlFor="newPassword">Password</label>
           <div className="relative">
             <input
+              name="newPassword"
               type={showPassword ? "text" : "password"}
               id="newPassword"
               placeholder="Enter your password"
@@ -135,12 +144,9 @@ function VerificationInput({ onComplete }) {
 
         <button
           type="submit"
-          disabled={loading}
-          className={`w-full text-white py-2 rounded-md transition duration-300 mt-5 ${
-            loading ? "bg-gray-400 cursor-not-allowed" : "bg-cyan-700 hover:bg-sky-500"
-          }`}
+          className="w-full bg-cyan-700 text-white py-2 rounded-md hover:bg-sky-500 transition duration-300 mt-5"
         >
-          {loading ? "Submitting..." : "Submit"}
+          Submit
         </button>
       </form>
     </div>

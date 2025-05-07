@@ -32,7 +32,7 @@ const { user } = useSelector(state => state.user)
   const editAdmin = async (e) => {
     e.preventDefault();
     try {
-        if(!user.adminRole.includes("superadmin")){
+        if(!user.adminRole.includes("Super-admin")){
             return toast.error("You are not authorized to Edit admins")
           }
       

@@ -37,7 +37,7 @@ function Administration() {
 
   // Handle errors and show toasts
   useEffect(() => {
-    if (user.adminRole !== "superadmin") {
+    if (user.adminRole !== "Super-admin") {
       toast.info("You are not authorized to view this page", )
       navigate("/dashboard")
       
@@ -90,7 +90,7 @@ function Administration() {
   const handleDelete = async (id) => { 
 
     try {
-    if(!user.adminRole.includes("superadmin")){
+    if(!user.adminRole.includes("Super-admin")){
       return toast.error("You are not authorized to delete admins")
     }
 
